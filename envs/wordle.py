@@ -2,7 +2,7 @@ import random
 from typing import List, Optional, Dict, Any, Tuple
 from PIL import Image, ImageDraw, ImageFont
 from base_env import BaseEnv
-from wordle_solver import *
+from solvers.wordle_solver import *
 
 class WordleEnv(BaseEnv):
     def __init__(self, word_list: Optional[List[str]] = None, allowed_guesses: Optional[List[str]] = None, max_attempts: int = 6):
