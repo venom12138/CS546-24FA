@@ -2,6 +2,7 @@ import random
 from typing import List, Optional, Dict, Any, Tuple
 from PIL import Image, ImageDraw, ImageFont
 from base_env import BaseEnv
+from wordle_solver import *
 
 class WordleEnv(BaseEnv):
     def __init__(self, word_list: Optional[List[str]] = None, allowed_guesses: Optional[List[str]] = None, max_attempts: int = 6):
@@ -10,7 +11,7 @@ class WordleEnv(BaseEnv):
         """
         if word_list is None:
             # Default word list
-            self.word_list = ['apple', 'banjo', 'cabin', 'delta', 'eagle']
+            self.word_list = list(WORDS)
         else:
             self.word_list = word_list
 
@@ -176,8 +177,9 @@ if __name__ == "__main__":
     # For testing purposes, let's use a fixed target word to ensure consistent results
     env.target_word = 'apple'
 
-    # Sample test guesses
-    test_guesses = ['banjo', 'cabin', 'delta', 'eagle', 'apple']
+    # # Sample test guesses
+    # test_guesses = ['banjo', 'cabin', 'delta', 'eagle', 'apple']
+    test_guesses = solver(env.target_word)
 
     for guess in test_guesses:
         print(f"Guessing: {guess}")
@@ -185,7 +187,7 @@ if __name__ == "__main__":
         img = env.render(mode="RGB")
         print(info['message'])
         print(f"obs:{observation}, reward:{reward}, done:{done}, info:{info}")
-        # img.save(f"wordle_{guess}.png")
+        img.save(f"wordle_{guess}.png")
         if done:
             break
 
