@@ -392,7 +392,7 @@ class SokobanEnv(gym.Env):
         assert mode in RENDERING_MODES, 'Unknown rendering mode {}'.format(mode)
 
         obs = self.get_image(mode=mode, **kwargs)
-        if mode in ['one_hot', 'one_hot_flatten', 'binary_map', 'rgb_array']:
+        if mode in ['one_hot', 'one_hot_flatten', 'binary_map', 'rgb_array', 'human']:
             return obs
         elif 'human' in mode:
             from gym.envs.classic_control import rendering
@@ -420,6 +420,7 @@ class SokobanEnv(gym.Env):
             img = room_to_rgb(self.room_state, self.room_fixed, surfaces=surfaces)
 
         return img
+
 
     # INFO: it does not clone self.num_env_steps
     def clone_full_state(self):
@@ -574,10 +575,10 @@ ACTION_LOOKUP = {
     1: 'push down',
     2: 'push left',
     3: 'push right',
-    4: 'pull up',
-    5: 'pull down',
-    6: 'pull left',
-    7: 'pull right',
+    # 4: 'pull up',
+    # 5: 'pull down',
+    # 6: 'pull left',
+    # 7: 'pull right',
 }
 
 # Moves are mapped to coordinate changes as follows
