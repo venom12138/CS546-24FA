@@ -43,9 +43,6 @@ for i_episode in range(1):#20
             else:
                 action = env.action_space.sample()
 
-            # # random approach
-            # action = env.action_space.sample()
-
             time.sleep(1)
             observation, reward, done, info = env.step(action)
 
