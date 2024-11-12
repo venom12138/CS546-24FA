@@ -12,9 +12,9 @@ DICT = "data/words_alpha.txt"
 
 # get word with required length and characters
 WORDS = {
-  word.lower()
-  for word in Path(DICT).read_text().splitlines()
-  if len(word) == WORD_LENGTH and set(word) < ALLOWABLE_CHARACTERS
+    word.lower()
+    for word in Path(DICT).read_text().splitlines()
+    if len(word) == WORD_LENGTH and set(word) < ALLOWABLE_CHARACTERS
 }
 
 # occurence of letters in words
@@ -97,8 +97,8 @@ def solver(answer):
                         pass
         possible_words = match(word_vector, possible_words)
         if word == answer:
-          return words
-    return words
+            return words, responses
+    return words, responses
 
 def step_solver(answer, possible_words):
     word_vector = [set(string.ascii_lowercase) for _ in range(WORD_LENGTH)]
@@ -122,9 +122,10 @@ def step_solver(answer, possible_words):
     
     return word, possible_words
 
-# # sample usage
-# answer = 'hidel'
+# sample usage
+# answer = 'apple'
 # words, responses = solver(answer)
 
 # print(words)
 # print(responses)
+# print(f"WORDS:{len(WORDS)}, {list(WORDS)[:10]}")

@@ -1,7 +1,7 @@
 import random
 from typing import List, Optional, Dict, Any, Tuple
 from PIL import Image, ImageDraw, ImageFont
-from base_env import BaseEnv
+from envs.base_env import BaseEnv
 from solvers.wordle_solver import *
 
 class WordleEnv(BaseEnv):
@@ -91,25 +91,25 @@ class WordleEnv(BaseEnv):
         """
         Generate feedback for a guess compared to the target word.
         """
-        feedback = ['grey'] * 5
+        feedback = ['?'] * 5
         target_letters = list(target)
         guess_letters = list(guess)
 
         # First pass: Check for correct positions (green)
         for i in range(5):
             if guess_letters[i] == target_letters[i]:
-                feedback[i] = 'green'
+                feedback[i] = 'G'
                 target_letters[i] = None  # Mark as used
                 guess_letters[i] = None
 
         # Second pass: Check for correct letters in wrong positions (yellow)
         for i in range(5):
             if guess_letters[i] and guess_letters[i] in target_letters:
-                feedback[i] = 'yellow'
+                feedback[i] = 'Y'
                 target_index = target_letters.index(guess_letters[i])
                 target_letters[target_index] = None  # Mark as used
 
-        return feedback
+        return "".join(feedback)
 
     def _get_observation(self) -> Dict[str, Any]:
         """
@@ -136,9 +136,9 @@ class WordleEnv(BaseEnv):
 
 
         colors = {
-            'green': (106, 170, 100),
-            'yellow': (201, 180, 88),
-            'grey': (120, 124, 126),
+            'G': (106, 170, 100),
+            'Y': (201, 180, 88),
+            '?': (120, 124, 126),
             'white': (255, 255, 255),
             'black': (0, 0, 0)
         }

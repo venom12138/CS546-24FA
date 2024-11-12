@@ -3,7 +3,7 @@
 **.jpeg
 **/.vscode
 **/*.gif
-
+/trajectories/
 ## MacOS specific
 
 .DS_Store
