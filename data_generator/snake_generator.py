@@ -19,7 +19,7 @@ BLUE = (0, 0, 255)
 DARKGRAY = (40, 40, 40)
 
 # Assuming that solvers.snake is your module with the necessary classes
-from solvers.snake import Base, Apple, Snake, Player, BFS, LongestPath, Fowardcheck, Mixed, Astar, Human
+from solvers.snake_solver import Base, Apple, Snake, Mixed
 
 NUM_TRAJS = 4
 SAVE_PATH = 'trajectories/snake_data'
