@@ -3,6 +3,7 @@ from pathlib import Path
 from collections import Counter
 from itertools import chain
 import operator
+import random
 
 ALLOWED_ATTEMPTS = 6
 WORD_LENGTH = 5
@@ -77,7 +78,7 @@ def solver(answer):
     possible_words = WORDS.copy()
     word_vector = [set(string.ascii_lowercase) for _ in range(WORD_LENGTH)]
     for attempt in range(1, ALLOWED_ATTEMPTS + 1):
-        word = sort_by_word_commonality(possible_words)[0][0]
+        word = random.choice(sort_by_word_commonality(possible_words)[:20])[0]
         words.append(word)
         response = get_response(word, answer)
         responses.append(response)

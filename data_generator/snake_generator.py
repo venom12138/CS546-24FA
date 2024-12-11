@@ -21,7 +21,7 @@ DARKGRAY = (40, 40, 40)
 # Assuming that solvers.snake is your module with the necessary classes
 from solvers.snake_solver import Base, Apple, Snake, Mixed
 
-NUM_TRAJS = 4
+NUM_TRAJS = 100
 SAVE_PATH = 'trajectories/snake_data'
 os.makedirs(SAVE_PATH, exist_ok=True)
 
@@ -195,7 +195,7 @@ def run_trial(trial_num):
 if __name__ == "__main__":
     # Determine the number of processes to use (2x number of CPU cores or NUM_TRAJS, whichever is smaller)
     num_processes = min(NUM_TRAJS, cpu_count() * 2)
-
+    np.random.seed(34332940)
     # Create a pool of worker processes
     with Pool(processes=num_processes) as pool:
         # Map the run_trial function to the number of trials

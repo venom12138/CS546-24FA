@@ -5,17 +5,20 @@ dict: key:{'id': {'answer': str,
                     'responses': [res1, res2, res3, res4, res5, res6],
                     'figures': [id_0, id_1, id_2, id_3, id_4, id_5, id_6]}}
 '''
+import sys
+sys.path.append('./')
 from solvers.wordle_solver import WORDS, solver
 from envs.wordle import WordleEnv
 import numpy as np
 import os
 
 CANDIDATE_WORDS = list(WORDS)
-NUM_TRAJS = 1000
+NUM_TRAJS = 100
 SAVE_PATH = 'trajectories/wordle_data'
 os.makedirs(SAVE_PATH, exist_ok=True)
 env = WordleEnv(word_list=CANDIDATE_WORDS, max_attempts=6)
 all_trajs = {}
+np.random.seed(439230)
 for i in range(NUM_TRAJS):
     observation = env.reset()
     img = env.render(mode="RGB")

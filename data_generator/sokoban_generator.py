@@ -14,14 +14,15 @@ from multiprocessing import Process, Pool
 import sys
 sys.path.append('./')
 from solvers.sokoban_solver.sokoban import solve_sokoban
-
+from copy import deepcopy
 # Before you can make a Sokoban Environment you need to call:
 # cd gym_sokoban, pip install -e .
 # import gym_sokoban
 # This import statement registers all Sokoban environments
 # provided by this package
 
-NUM_TRAJS = 500
+NUM_TRAJS = 4000
+np.random.seed(334120)
 SAVE_PATH = 'trajectories/sokoban_data'
 os.makedirs(SAVE_PATH, exist_ok=True)
 env_name = 'Sokoban-v0'
@@ -52,7 +53,7 @@ def gen_trajs(start_idx, end_idx):
                 5: '&',  # player
             }
             '''
-            state = env.room_state
+            state = deepcopy(env.room_state)
             img = env.render(mode='rgb_array')
             image = Image.fromarray(img)
             image.save(f"{SAVE_PATH}/traj_{i}/0.png")
@@ -66,7 +67,7 @@ def gen_trajs(start_idx, end_idx):
                 action = solver_action[t]
                 observation, reward, done, info = env.step(action)
                 
-                state = env.room_state
+                state = deepcopy(env.room_state)
                 img = env.render(mode='rgb_array')
                 # save this image as a file
                 image = Image.fromarray(img)
